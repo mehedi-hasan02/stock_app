@@ -1,6 +1,7 @@
 import pandas as pd
 import pickle
 import gradio as gr
+import os 
 
 with open("stock_rf_pipeline.pkl", "rb") as f:
     model = pickle.load(f)
@@ -33,7 +34,10 @@ app = gr.Interface(
     title="Stock5 Prediction"
 )
 
-app.launch(share=True)
+app.launch(
+    server_name="0.0.0.0",
+    server_port=int(os.environ.get("PORT", 7860))
+)
 
 
 
